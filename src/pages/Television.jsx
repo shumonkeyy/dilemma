@@ -1,18 +1,29 @@
 import React, { useRef } from "react";
 import "../index.css";
-import tvImage from "../assets/tv.jpg"; // Import image properly
+import tvImage from "../assets/tv.jpg";
+import { STORYLINE } from "../lines";
 
 const Television = () => {
+  //declaring variables
   const welcomePageRef = useRef(null);
-
+  const storyLine = useRef(null);
+  const storyBoard = useRef(null);
+  //hide welcome page to start story
   const start = () => {
     if (welcomePageRef.current) {
-      welcomePageRef.current.classList.add("hide"); // Fixed classList issue
+      welcomePageRef.current.classList.add("hide");
+    }
+    if (storyBoard.current) {
+      storyBoard.current.classList.remove("hide");
+    }
+    if (storyLine.current) {
+      storyLine.current.innerHTML = STORYLINE[0];
     }
   };
 
   return (
     <div>
+      {/* welcome page */}
       <img src={tvImage} alt="" className="overlay-television" />
 
       <div ref={welcomePageRef} className="overlay-television">
@@ -27,6 +38,14 @@ const Television = () => {
           >
             Instructions
           </button>
+        </div>
+      </div>
+
+      <div ref={storyBoard} className="overlay-television hide">
+        <div className="overlap">
+          <p ref={storyLine}></p>
+          <button onClick={() => console.log("next")}>Next</button>
+          <button onClick={() => console.log("quit")}>Quit</button>
         </div>
       </div>
 

@@ -11,7 +11,6 @@ body {
   transform: translate(-50%, -50%);
   color: #fff;
   padding: 10px 20px;
-  font-size: 20px;
   text-align: center;
 }
 
@@ -20,7 +19,7 @@ body {
   margin-top: -13%;
   margin-left: 30%;
   text-align: left;
-  font-size: 20px;
+  width: 350px;
   /* top: 30%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -35,7 +34,7 @@ h1 {
 }
 
 p {
-  font-size: 20px !important;
+  font-size: 16px !important;
 }
 
 .hide {
