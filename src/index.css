@@ -1,0 +1,43 @@
+body {
+  background-image: url("src/assets/background.jpg");
+  font-family: "Times New Roman", Times, serif !important;
+}
+
+.overlay-television {
+  position: absolute;
+  width: 80%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.overlap {
+  position: absolute;
+  margin-top: -13%;
+  margin-left: 30%;
+  text-align: left;
+  font-size: 20px;
+  /* top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 20px;
+  text-align: left; */
+}
+
+h1 {
+  font-size: 30px !important;
+}
+
+p {
+  font-size: 20px !important;
+}
+
+.hide {
+  display: none !important;
+}
