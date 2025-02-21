@@ -129,10 +129,12 @@ const Television = () => {
         <div className="overlap">
           <p ref={storyLine}></p>
           <div ref={choice} className="hide">
-            <p ref={ca}></p>
-            <p ref={cb}></p>
-            <button onClick={() => choicea(STORYLINE[lineNumber])}>A</button>
-            <button onClick={() => choiceb(STORYLINE[lineNumber])}>B</button>
+            <p className="option" ref={ca}></p>
+            <p className="option" ref={cb}></p>
+            <div className="choice-btn-container">
+              <button onClick={() => choicea(STORYLINE[lineNumber])}>A</button>
+              <button onClick={() => choiceb(STORYLINE[lineNumber])}>B</button>
+            </div>
           </div>
           <div className="btn-container">
             {/* <div > */}

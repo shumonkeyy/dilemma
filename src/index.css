@@ -20,7 +20,7 @@ body {
   margin-left: 30%;
   text-align: left;
   width: 30%;
-  height: 40vh;
+  height: 45vh;
 }
 
 h1 {
@@ -29,6 +29,8 @@ h1 {
 
 p {
   font-size: 16px !important;
+  line-height: 22px !important;
+  margin-bottom: 1rem !important;
 }
 
 .hide {
@@ -43,4 +45,22 @@ p {
   width: 138%;
   position: absolute;
   bottom: 20px;
+}
+.choice-btn-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  width: 138%;
+  position: absolute;
+  bottom: 50px;
+}
+.scroll-backing {
+  position: absolute;
+  width: 35%;
+  top: 50%;
+  left: 50%;
+  height: 55vh;
+  transform: translate(-50%, -50%);
+  color: #000;
+  text-align: center;
 }
