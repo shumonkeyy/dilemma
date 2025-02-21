@@ -20,6 +20,12 @@ const Television = () => {
     if (welcomePageRef.current) {
       welcomePageRef.current.classList.add("hide");
     }
+    if (choice.current && !choice.current.classList.contains("hide")) {
+      choice.current.classList.add("hide");
+    }
+    if (nextBtn.current && nextBtn.current.classList.contains("hide")) {
+      nextBtn.current.classList.remove("hide");
+    }
     if (storyBoard.current) {
       storyBoard.current.classList.remove("hide");
     }
@@ -118,6 +124,7 @@ const Television = () => {
         </div>
       </div>
 
+      {/* storyBoard  */}
       <div ref={storyBoard} className="overlay-television hide">
         <div className="overlap">
           <p ref={storyLine}></p>
@@ -128,12 +135,20 @@ const Television = () => {
             <button onClick={() => choiceb(STORYLINE[lineNumber])}>B</button>
           </div>
           <div ref={nextBtn}>
-            <button onClick={() => next(STORYLINE[lineNumber])}>Next</button>
+            <button
+              className="button"
+              onClick={() => next(STORYLINE[lineNumber])}
+            >
+              Next
+            </button>
           </div>
-          <button onClick={() => quit()}>Quit</button>
+          <button className="button" onClick={() => quit()}>
+            Quit
+          </button>
         </div>
       </div>
 
+      {/* modal */}
       <div
         className="modal fade"
         id="exampleModal"
@@ -145,7 +160,7 @@ const Television = () => {
           <div className="modal-content">
             <div className="modal-header">
               <h1 className="modal-title fs-5" id="exampleModalLabel">
-                Modal title
+                Instructions
               </h1>
               <button
                 type="button"
@@ -155,7 +170,19 @@ const Television = () => {
               ></button>
             </div>
             <div className="modal-body">
-              <p>hi</p>
+              <p>
+                Welcome to Dillemma, Major!
+                <br />
+                <br />
+                Your task as the Major (one of the higher ups in the police
+                department) is to find out who committed the crime while
+                withstanding the pressure from the public. When given the
+                choice, you will have to make a decision. Read the choices, and
+                carefully click on the button after making your judgement.
+                <br />
+                <br />
+                The result of this case relies on you, Major.
+              </p>
             </div>
             <div className="modal-footer">
               <button
@@ -164,9 +191,6 @@ const Television = () => {
                 data-bs-dismiss="modal"
               >
                 Close
-              </button>
-              <button type="button" className="btn btn-primary">
-                Save changes
               </button>
             </div>
           </div>

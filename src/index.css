@@ -40,3 +40,7 @@ p {
 .hide {
   display: none !important;
 }
+
+.button {
+  margin-left: 120%;
+}
