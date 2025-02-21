@@ -134,17 +134,20 @@ const Television = () => {
             <button onClick={() => choicea(STORYLINE[lineNumber])}>A</button>
             <button onClick={() => choiceb(STORYLINE[lineNumber])}>B</button>
           </div>
-          <div ref={nextBtn}>
+          <div className="btn-container">
+            {/* <div > */}
             <button
+              ref={nextBtn}
               className="button"
               onClick={() => next(STORYLINE[lineNumber])}
             >
               Next
             </button>
+            {/* </div> */}
+            <button className="button" onClick={() => quit()}>
+              Quit
+            </button>
           </div>
-          <button className="button" onClick={() => quit()}>
-            Quit
-          </button>
         </div>
       </div>
 

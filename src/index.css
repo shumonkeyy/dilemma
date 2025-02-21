@@ -19,14 +19,8 @@ body {
   margin-top: -13%;
   margin-left: 30%;
   text-align: left;
-  width: 350px;
-  /* top: 30%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: #fff;
-  padding: 10px 20px;
-  font-size: 20px;
-  text-align: left; */
+  width: 30%;
+  height: 60vh;
 }
 
 h1 {
@@ -41,6 +35,12 @@ p {
   display: none !important;
 }
 
-.button {
-  margin-left: 120%;
+.btn-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: end;
+  width: 138%;
+  position: absolute;
+  bottom: 20px;
 }
