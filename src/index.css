@@ -5,7 +5,8 @@ body {
 
 .overlay-television {
   position: absolute;
-  width: 80%;
+  width: 50%;
+  margin-top: 2%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -16,10 +17,10 @@ body {
 
 .overlap {
   position: absolute;
-  margin-top: -13%;
-  margin-left: 30%;
+  margin-top: -23%;
+  margin-left: 12%;
   text-align: left;
-  width: 30%;
+  width: 55%;
   height: 45vh;
 }
 
@@ -35,6 +36,9 @@ p {
 
 .hide {
   display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  height: 0 !important;
 }
 
 .btn-container {

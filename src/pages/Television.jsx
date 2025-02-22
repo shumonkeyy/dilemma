@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import "../index.css";
-import tvImage from "../assets/tv.jpg";
+import tvImage from "../assets/tv.png";
 import { STORYLINE } from "../lines";
 
 const Television = () => {
@@ -113,7 +113,11 @@ const Television = () => {
         <div className="overlap">
           <h1>Welcome back, Major!</h1>
           <p>There is a case waiting for you.</p>
-          <button onClick={() => start(STORYLINE[lineNumber])}>Start</button>
+          <button
+            onClick={() => setTimeout(() => start(STORYLINE[lineNumber]), 100)}
+          >
+            Start
+          </button>
           <button
             type="button"
             data-bs-toggle="modal"
@@ -183,7 +187,16 @@ const Television = () => {
                 department) is to find out who committed the crime while
                 withstanding the pressure from the public. When given the
                 choice, you will have to make a decision. Read the choices, and
-                carefully click on the button after making your judgement.
+                carefully click on the either button A or button B after making
+                your judgement. To go to the next scene after you finish
+                reading, click 'Next'. To stop the game, click 'Quit'.
+                <br />
+                <br />
+                This game is inspired by the real life case of Eileen Sarmenta
+                in the Philippines. We have done our best to try and replicate
+                the story in a respectful but thought provoking way so you, the
+                major, can have an engaging experience of controlling the fate
+                of a crime case.
                 <br />
                 <br />
                 The result of this case relies on you, Major.
