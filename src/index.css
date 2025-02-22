@@ -6,7 +6,6 @@ body {
 .overlay-television {
   position: absolute;
   width: 50%;
-  margin-top: 2%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -21,7 +20,7 @@ body {
   margin-left: 12%;
   text-align: left;
   width: 55%;
-  height: 45vh;
+  height: 53vh;
 }
 
 h1 {
@@ -36,9 +35,6 @@ p {
 
 .hide {
   display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
-  height: 0 !important;
 }
 
 .btn-container {
@@ -56,7 +52,7 @@ p {
   justify-content: end;
   width: 138%;
   position: absolute;
-  bottom: 50px;
+  bottom: 110px;
 }
 .scroll-backing {
   position: absolute;

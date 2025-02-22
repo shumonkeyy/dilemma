@@ -5,7 +5,7 @@ import { STORYLINE } from "../lines";
 
 const Television = () => {
   //declaring variables
-  const welcomePageRef = useRef(null);
+  const welcomePage = useRef(null);
   const storyLine = useRef(null);
   const storyBoard = useRef(null);
   const [lineNumber, setLineNumber] = useState(0);
@@ -17,9 +17,11 @@ const Television = () => {
   //hide welcome page to start story
   const start = (storyline) => {
     const line = storyline.line;
-    if (welcomePageRef.current) {
-      welcomePageRef.current.classList.add("hide");
+
+    if (welcomePage.current) {
+      welcomePage.current.classList.add("hide");
     }
+
     if (choice.current && !choice.current.classList.contains("hide")) {
       choice.current.classList.add("hide");
     }
@@ -77,8 +79,8 @@ const Television = () => {
 
   //quit
   const quit = () => {
-    if (welcomePageRef.current) {
-      welcomePageRef.current.classList.remove("hide");
+    if (welcomePage.current) {
+      welcomePage.current.classList.remove("hide");
     }
     if (storyBoard.current) {
       storyBoard.current.classList.add("hide");
@@ -109,7 +111,7 @@ const Television = () => {
       {/* welcome page */}
       <img src={tvImage} alt="" className="overlay-television" />
 
-      <div ref={welcomePageRef} className="overlay-television">
+      <div ref={welcomePage} className="overlay-television">
         <div className="overlap">
           <h1>Welcome back, Major!</h1>
           <p>There is a case waiting for you.</p>
@@ -121,7 +123,7 @@ const Television = () => {
           <button
             type="button"
             data-bs-toggle="modal"
-            data-bs-target="#exampleModal"
+            data-bs-target="#instructionModal"
           >
             Instructions
           </button>
@@ -141,7 +143,6 @@ const Television = () => {
             </div>
           </div>
           <div className="btn-container">
-            {/* <div > */}
             <button
               ref={nextBtn}
               className="button"
@@ -149,18 +150,25 @@ const Television = () => {
             >
               Next
             </button>
-            {/* </div> */}
             <button className="button" onClick={() => quit()}>
               Quit
             </button>
+            <button
+              type="button"
+              data-bs-toggle="modal"
+              data-bs-target="#instructionModal"
+            >
+              Help
+            </button>
+            <button>Clues</button>
           </div>
         </div>
       </div>
 
-      {/* modal */}
+      {/* instruction/help modal */}
       <div
         className="modal fade"
-        id="exampleModal"
+        id="instructionModal"
         tabIndex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
@@ -214,6 +222,8 @@ const Television = () => {
           </div>
         </div>
       </div>
+
+      {/* clues modal */}
     </div>
   );
 };
