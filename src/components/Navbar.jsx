@@ -23,7 +23,7 @@ const Navbar = () => {
             <ul className="navbar-nav">
               <li className="nav-item">
                 <a className="nav-link active" aria-current="page" href="#">
-                  Home
+                  Home.
                 </a>
               </li>
               <li
@@ -32,7 +32,12 @@ const Navbar = () => {
                 data-bs-target="#case-info"
               >
                 <a className="nav-link" href="#">
-                  Case Information
+                  Case Information.
+                </a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="#">
+                  More.
                 </a>
               </li>
             </ul>
@@ -44,7 +49,7 @@ const Navbar = () => {
       <div
         className="modal fade"
         id="case-info"
-        tabindex="-1"
+        tabIndex="-1"
         aria-labelledby="caseInfoLabel"
         aria-hidden="true"
       >
@@ -61,7 +66,11 @@ const Navbar = () => {
                 aria-label="Close"
               ></button>
             </div>
-            <div className="modal-body">...</div>
+            <div className="modal-body">
+              <a href="https://youtu.be/BEwBdeQ4UQk">
+                Click here to learn more.
+              </a>
+            </div>
             <div className="modal-footer">
               <button
                 type="button"

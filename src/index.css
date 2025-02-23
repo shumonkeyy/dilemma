@@ -24,6 +24,16 @@ body {
   /* overflow-y: scroll; */
 }
 
+.end-screen {
+  position: absolute;
+  margin-top: -23%;
+  margin-left: 12%;
+  text-align: middle;
+  width: 55%;
+  height: 45vh;
+  overflow-y: scroll;
+}
+
 h1 {
   font-size: 30px !important;
 }

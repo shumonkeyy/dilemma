@@ -112,8 +112,11 @@ const Television = () => {
     if (welcomePage.current) {
       welcomePage.current.classList.remove("hide");
     }
-    if (storyBoard.current) {
+    if (storyBoard.current && !storyBoard.current.classList.contains("hide")) {
       storyBoard.current.classList.add("hide");
+    }
+    if (endScreen.current && !endScreen.current.classList.contains("hide")) {
+      endScreen.current.classList.add("hide");
     }
     setLineNumber(0);
   };
@@ -149,6 +152,7 @@ const Television = () => {
   return (
     <div>
       <img src={tvImage} alt="" className="overlay-television" />
+
       {/* enter your name screen */}
       <div ref={userName} className="overlay-television">
         <div className="overlap">
@@ -229,9 +233,13 @@ const Television = () => {
 
       {/* end screen */}
       <div ref={endScreen} className="overlay-television hide">
-        <div className="overlap">
+        <div className="end-screen">
           <h1>end screen</h1>
-          <p>your choices:</p>
+          <p>
+            scroll to the end to restart.
+            <br />
+            your choices:
+          </p>
           <ul>
             {answer.map((picked) => {
               return <li key={answer.indexOf(picked)}>{picked}</li>;
@@ -242,8 +250,10 @@ const Television = () => {
             <br />
             mistake at: {answer[answer.length - 1]} <br />
           </p>
+          <button onClick={() => quit()}>Restart</button>
         </div>
       </div>
+
       {/* instruction/help modal */}
       <div
         className="modal fade"
