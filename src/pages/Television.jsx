@@ -24,25 +24,18 @@ const Television = () => {
 
   //continue to welcome page
   const continueToWelcome = () => {
-    if (usernameInput.current) {
-      const inputValue = usernameInput.current.value;
-      setUser(inputValue);
-    }
-
     if (userName.current) {
       userName.current.classList.add("hide");
     }
     if (welcomePage.current) {
       welcomePage.current.classList.remove("hide");
     }
+    if (usernameInput.current) {
+      const inputValue = usernameInput.current.value;
+      setUser(inputValue);
+    }
   };
   // Update the header when user state changes
-  useEffect(() => {
-    if (usernameHead.current) {
-      usernameHead.current.innerHTML = "Welcome, Major " + user + "!";
-    }
-  }, [user]);
-
   //hide welcome page to start story
   const start = (storyline) => {
     const line = storyline.line;
@@ -166,7 +159,9 @@ const Television = () => {
           </p>
           <form action="">
             <input type="text" placeholder="Name" ref={usernameInput} />
-            <button onClick={() => continueToWelcome()}>continue</button>
+            <button type="button" onClick={() => continueToWelcome()}>
+              continue
+            </button>
           </form>
         </div>
       </div>
@@ -174,7 +169,7 @@ const Television = () => {
       {/* welcome page */}
       <div ref={welcomePage} className="overlay-television hide">
         <div className="overlap">
-          <h1 ref={usernameHead}>Welcome, Major!</h1>
+          <h1 ref={usernameHead}>Welcome, Major {user}!</h1>
           <p>There is a case waiting for you.</p>
           <button
             onClick={() => setTimeout(() => start(STORYLINE[lineNumber]), 100)}

@@ -277,11 +277,8 @@ export const STORYLINE = [
   },
   {
     id: 42,
-    line: '"So, who do you think did it?”<br/><br/>"Well, I heard that the general\'s son had gotten into a fight with one of the victims before the murder. Maybe you should look into that." <br/><br/>',
-    choice: true,
-    ca: "(A) He seems to be telling the truth...",
-    cb: "(B) He's the murderer!",
-    gotoA: 43,
-    gotoB: 44,
+    line: '"So, who do you think did it?”<br/><br/>The mayor leaned closer. "Well, I heard that the general\'s son had gotten into a fight with one of the victims before the murder. Maybe you should look into that."<br/><br/>Suddenly, all the pieces started to connect together. All the evidence made so far, the sketch made depicting the missing officer, the bullet case from officer Louis, the authority figure the brothers were working for, led to my answer. <br/><br/><i>The mayor is the murderer.</i>',
+    choice: false,
+    goto: 43,
   },
 ];
