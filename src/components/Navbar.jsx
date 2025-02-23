@@ -45,7 +45,7 @@ const Navbar = () => {
         className="modal fade"
         id="case-info"
         tabindex="-1"
-        aria-labelledby="exampleModalLabel"
+        aria-labelledby="caseInfoLabel"
         aria-hidden="true"
       >
         <div className="modal-dialog">

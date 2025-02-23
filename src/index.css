@@ -21,6 +21,7 @@ body {
   text-align: left;
   width: 55%;
   height: 53vh;
+  /* overflow-y: scroll; */
 }
 
 h1 {
