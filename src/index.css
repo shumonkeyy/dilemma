@@ -17,11 +17,12 @@ body {
 .overlap {
   position: absolute;
   margin-top: -23%;
+  /* margin-top: 12%; */
   margin-left: 12%;
   text-align: left;
   width: 55%;
-  height: 53vh;
-  /* overflow-y: scroll; */
+  height: 50vh;
+  overflow-y: scroll;
 }
 
 .end-screen {
@@ -53,17 +54,17 @@ p {
   flex-direction: column;
   justify-content: space-between;
   align-items: end;
-  width: 138%;
+  width: 90%;
   position: absolute;
-  bottom: 20px;
+  bottom: -150px;
 }
 .choice-btn-container {
   display: flex;
   flex-direction: row;
   justify-content: end;
-  width: 138%;
+  width: 90%;
   position: absolute;
-  bottom: 110px;
+  bottom: -60px;
 }
 .scroll-backing {
   position: absolute;
@@ -74,4 +75,10 @@ p {
   transform: translate(-50%, -50%);
   color: #000;
   text-align: center;
+}
+@media screen and (max-width: 800px) {
+  .overlay-television,
+  .overlap {
+    display: none;
+  }
 }

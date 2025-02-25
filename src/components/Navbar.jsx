@@ -45,7 +45,7 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* modal  */}
+      {/* case Info modal  */}
       <div
         className="modal fade"
         id="case-info"

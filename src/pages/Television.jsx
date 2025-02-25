@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState } from "react";
 import "../index.css";
 import tvImage from "../assets/tv.png";
 import { STORYLINE } from "../lines";
@@ -12,6 +12,7 @@ const Television = () => {
   const ca = useRef(null);
   const cb = useRef(null);
   const choice = useRef(null);
+  const choiceButtons = useRef(null);
   const nextBtn = useRef(null);
   const [notes, setNotes] = useState("");
   const notepad = useRef(null);
@@ -35,7 +36,7 @@ const Television = () => {
       setUser(inputValue);
     }
   };
-  // Update the header when user state changes
+
   //hide welcome page to start story
   const start = (storyline) => {
     const line = storyline.line;
@@ -46,6 +47,12 @@ const Television = () => {
 
     if (choice.current && !choice.current.classList.contains("hide")) {
       choice.current.classList.add("hide");
+    }
+    if (
+      choiceButtons.current &&
+      !choiceButtons.current.classList.contains("hide")
+    ) {
+      choiceButtons.current.classList.add("hide");
     }
     if (nextBtn.current && nextBtn.current.classList.contains("hide")) {
       nextBtn.current.classList.remove("hide");
@@ -79,6 +86,9 @@ const Television = () => {
         if (!choice.current.classList.contains("hide")) {
           choice.current.classList.add("hide");
         }
+        if (!choiceButtons.current.classList.contains("hide")) {
+          choiceButtons.current.classList.add("hide");
+        }
       }
       if (nextBtn.current && nextBtn.current.classList.contains("hide")) {
         nextBtn.current.classList.remove("hide");
@@ -99,6 +109,11 @@ const Television = () => {
         }
         if (cb.current) {
           cb.current.innerHTML = lineB;
+        }
+      }
+      if (choiceButtons.current) {
+        if (choiceButtons.current.classList.contains("hide")) {
+          choiceButtons.current.classList.remove("hide");
         }
       }
     }
@@ -197,37 +212,39 @@ const Television = () => {
           <div ref={choice} className="hide">
             <p className="option" ref={ca}></p>
             <p className="option" ref={cb}></p>
-            <div className="choice-btn-container">
-              <button onClick={() => choicea(STORYLINE[lineNumber])}>A</button>
-              <button onClick={() => choiceb(STORYLINE[lineNumber])}>B</button>
-            </div>
           </div>
-          <div className="btn-container">
-            <button
-              ref={nextBtn}
-              className="button"
-              onClick={() => next(STORYLINE[lineNumber])}
-            >
-              Next
-            </button>
-            <button className="button" onClick={() => quit()}>
-              Quit
-            </button>
-            <button
-              type="button"
-              data-bs-toggle="modal"
-              data-bs-target="#instructionModal"
-            >
-              Help
-            </button>
-            <button
-              type="button"
-              data-bs-toggle="modal"
-              data-bs-target="#notesModal"
-            >
-              Notes
-            </button>
-          </div>
+        </div>
+        {/* button div */}
+        <div className="btn-container">
+          <button
+            ref={nextBtn}
+            className="button"
+            onClick={() => next(STORYLINE[lineNumber])}
+          >
+            Next
+          </button>
+          <button className="button" onClick={() => quit()}>
+            Quit
+          </button>
+          <button
+            type="button"
+            data-bs-toggle="modal"
+            data-bs-target="#instructionModal"
+          >
+            Help
+          </button>
+          <button
+            type="button"
+            data-bs-toggle="modal"
+            data-bs-target="#notesModal"
+          >
+            Notes
+          </button>
+        </div>
+        {/* choice buttons */}
+        <div ref={choiceButtons} className="choice-btn-container hide">
+          <button onClick={() => choicea(STORYLINE[lineNumber])}>A</button>
+          <button onClick={() => choiceb(STORYLINE[lineNumber])}>B</button>
         </div>
       </div>
 

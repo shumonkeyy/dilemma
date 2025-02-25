@@ -281,4 +281,19 @@ export const STORYLINE = [
     choice: false,
     goto: 43,
   },
+  {
+    id: 43,
+    line: "In all my years of working as the head of the police force, no case has ever been as mentally damaging as this one. 2 officers and our mayor, men who were supposed to protect the lives of citizens, were the merciless murderers of 2 innocent students. No amount of gore could compare to the disgust I feel towards these men. <br/><br/>Though I am still processing this betrayal, the investigation of this case must continue. There were still 4 murderers on the loose whose presence puts 12,000 lives in danger. ",
+    choice: false,
+    goto: 44,
+  },
+  {
+    id: 44,
+    line: "<i>But how do I find them?</i>",
+    choice: true,
+    ca: "(A) Utilize the evidence found",
+    cb: "(B) Have the task force do another round check on houses",
+    gotoa: 46,
+    gotob: 45,
+  },
 ];
