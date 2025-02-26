@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import "../index.css";
 import tvImage from "../assets/tv.png";
 import { STORYLINE } from "../lines";
@@ -22,6 +22,35 @@ const Television = () => {
   const usernameHead = useRef(null);
   const [answer, setAnswer] = useState([]);
   const endScreen = useRef(null);
+  const [seconds, setSeconds] = useState(0);
+  const [minutes, setMinutes] = useState(0);
+  const [hours, setHours] = useState(0);
+  const [textTime, setTextTime] = useState(false);
+  const [isTimed, setIsTimed] = useState(false);
+  const clock1 = useRef(null);
+  const clock2 = useRef(null);
+
+  useEffect(() => {
+    let interval;
+
+    if (isTimed) {
+      interval = setInterval(() => {
+        setSeconds((prevSeconds) => prevSeconds + 1);
+        if (seconds == 60) {
+          setSeconds(0);
+          setMinutes((prevMinutes) => prevMinutes + 1);
+        }
+        if (minutes == 60) {
+          setMinutes(0);
+          setHours((prevHours) => prevHours + 1);
+        }
+      }, 1000);
+    } else {
+      clearInterval(interval);
+    }
+
+    return () => clearInterval(interval);
+  }, [isTimed]);
 
   //continue to welcome page
   const continueToWelcome = () => {
@@ -40,7 +69,7 @@ const Television = () => {
   //hide welcome page to start story
   const start = (storyline) => {
     const line = storyline.line;
-
+    setIsTimed(true);
     if (welcomePage.current) {
       welcomePage.current.classList.add("hide");
     }
@@ -74,6 +103,8 @@ const Television = () => {
         storyBoard.current.classList.add("hide");
       }
       if (endScreen.current) {
+        setIsTimed(false);
+        setTextTime(false);
         endScreen.current.classList.remove("hide");
       }
       return;
@@ -124,6 +155,8 @@ const Television = () => {
   };
   //quit
   const quit = () => {
+    setIsTimed(false);
+    setSeconds(0);
     if (welcomePage.current) {
       welcomePage.current.classList.remove("hide");
     }
@@ -134,6 +167,7 @@ const Television = () => {
       endScreen.current.classList.add("hide");
     }
     setLineNumber(0);
+    setAnswer([]);
   };
 
   //choice a is picked
@@ -162,6 +196,19 @@ const Television = () => {
   const saveNotepad = () => {
     setNotes(notepad.value);
     notepad.value = notes;
+  };
+
+  // switch clock mode
+  const switchClock = () => {
+    setTextTime(true);
+    if (textTime) {
+      if (clock1.current) {
+        clock1.current.classList.toggle("hide");
+      }
+      if (clock2.current) {
+        clock2.current.classList.toggle("hide");
+      }
+    }
   };
 
   return (
@@ -243,8 +290,18 @@ const Television = () => {
         </div>
         {/* choice buttons */}
         <div ref={choiceButtons} className="choice-btn-container hide">
-          <button onClick={() => choicea(STORYLINE[lineNumber])}>A</button>
-          <button onClick={() => choiceb(STORYLINE[lineNumber])}>B</button>
+          <button
+            className="button"
+            onClick={() => choicea(STORYLINE[lineNumber])}
+          >
+            A
+          </button>
+          <button
+            className="button"
+            onClick={() => choiceb(STORYLINE[lineNumber])}
+          >
+            B
+          </button>
         </div>
       </div>
 
@@ -252,11 +309,22 @@ const Television = () => {
       <div ref={endScreen} className="overlay-television hide">
         <div className="end-screen">
           <h1>end screen</h1>
-          <p>
-            scroll to the end to restart.
-            <br />
-            your choices:
+          <p>scroll to the end to restart.</p>
+          <p ref={clock1}>
+            time: {hours < 10 ? "0" + hours : hours}:
+            {minutes < 10 ? "0" + minutes : minutes}:
+            {seconds < 10 ? "0" + seconds : seconds} &nbsp;&nbsp;
+            <span>
+              <button onClick={() => switchClock()}>switch timer mode</button>
+            </span>
           </p>
+          <p ref={clock2} className="hide">
+            time: {hours} H {minutes} M {seconds} S &nbsp;&nbsp;
+            <span>
+              <button onClick={() => switchClock()}>switch timer mode</button>
+            </span>
+          </p>
+          <p>your choices:</p>
           <ul>
             {answer.map((picked) => {
               return <li key={answer.indexOf(picked)}>{picked}</li>;
@@ -347,7 +415,7 @@ const Television = () => {
             <div className="modal-content">
               <div className="modal-header">
                 <h1 className="modal-title fs-5" id="exampleModalLabel">
-                  Mayor's notepad
+                  Major's notepad
                 </h1>
                 <button
                   type="button"

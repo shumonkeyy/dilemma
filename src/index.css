@@ -76,9 +76,19 @@ p {
   color: #000;
   text-align: center;
 }
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 768px) {
   .overlay-television,
   .overlap {
     display: none;
+  }
+}
+@media screen and (max-width: 900px) {
+  .overlap {
+    height: 15vh;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .overlap {
+    height: 27vh;
   }
 }
