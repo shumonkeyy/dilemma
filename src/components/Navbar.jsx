@@ -35,7 +35,11 @@ const Navbar = () => {
                   Case Information.
                 </a>
               </li>
-              <li className="nav-item">
+              <li
+                className="nav-item"
+                data-bs-toggle="modal"
+                data-bs-target="#moreModal"
+              >
                 <a className="nav-link" href="#">
                   More.
                 </a>
@@ -70,6 +74,46 @@ const Navbar = () => {
               <a href="https://youtu.be/BEwBdeQ4UQk">
                 Click here to learn more.
               </a>
+            </div>
+            <div className="modal-footer">
+              <button
+                type="button"
+                className="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+              <button type="button" className="btn btn-primary">
+                Save changes
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* more modal */}
+      <div
+        className="modal fade"
+        id="moreModal"
+        tabIndex="-1"
+        aria-labelledby="moreModal"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h1 className="modal-title fs-5" id="exampleModalLabel">
+                More.
+              </h1>
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div className="modal-body">
+              <a href="">GitHub.</a>
             </div>
             <div className="modal-footer">
               <button
