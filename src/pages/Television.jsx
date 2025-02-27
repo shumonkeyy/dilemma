@@ -420,8 +420,10 @@ const Television = () => {
                 in the Philippines. We have done our best to try and replicate
                 the story in a respectful but thought provoking way so you, the
                 major, can have an engaging experience of controlling the fate
-                of a crime case. (P.S. Try not to check the Case Information
-                Modal until you finish in order to not spoil the events.)
+                of a crime case while gaining insights on how those with
+                authority can abuse their power. (P.S. Try not to check the Case
+                Information Modal until you finish in order to not spoil the
+                events.)
                 <br />
                 <br />
                 The result of this case relies on you, Major.
