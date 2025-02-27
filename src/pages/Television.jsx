@@ -33,9 +33,9 @@ const Television = () => {
   const [win, setWin] = useState(false);
   const audio = new Audio(sound);
 
+  // timer: will start when "start" button is clicked and will stop at either quit or when the interactive story is finished.
   useEffect(() => {
     let interval;
-
     if (isTimed) {
       interval = setInterval(() => {
         setSeconds((prevSeconds) => prevSeconds + 1);
@@ -57,12 +57,15 @@ const Television = () => {
 
   //continue to welcome page
   const continueToWelcome = () => {
+    //hide "type your name" page
     if (userName.current) {
       userName.current.classList.add("hide");
     }
+    //show welcome page
     if (welcomePage.current) {
       welcomePage.current.classList.remove("hide");
     }
+    //use name entered in "type your name page" to add it to the welcome page
     if (usernameInput.current) {
       const inputValue = usernameInput.current.value;
       setUser(inputValue);
@@ -72,36 +75,44 @@ const Television = () => {
   //hide welcome page to start story
   const start = (storyline) => {
     const line = storyline.line;
-    setIsTimed(true);
+    setIsTimed(true); //start the timer
+    //hide the welcome screen
     if (welcomePage.current) {
       welcomePage.current.classList.add("hide");
     }
-
+    //hide the choices (no choices at the start)
     if (choice.current && !choice.current.classList.contains("hide")) {
       choice.current.classList.add("hide");
     }
+    //hide the choice Buttons
     if (
       choiceButtons.current &&
       !choiceButtons.current.classList.contains("hide")
     ) {
       choiceButtons.current.classList.add("hide");
     }
+    //show the next Button
     if (nextBtn.current && nextBtn.current.classList.contains("hide")) {
       nextBtn.current.classList.remove("hide");
     }
+    //show the storyboard
     if (storyBoard.current) {
       storyBoard.current.classList.remove("hide");
     }
+    //set the line to the data from the array based on line number
     if (storyLine.current) {
       storyLine.current.innerHTML = line;
     }
+    //setting new Line Number
     const newLineNumber = lineNumber + 1;
     setLineNumber(newLineNumber);
+    //playing audio
     audio.play();
   };
 
-  //next page
+  //next page: will go to the next scene
   const next = (storyline) => {
+    //if the story is over (basically if the player failed to find out about the truth and bring justice)...
     if (lineNumber == -1) {
       if (storyBoard.current) {
         storyBoard.current.classList.add("hide");
@@ -113,11 +124,14 @@ const Television = () => {
       }
       return;
     }
+    //if it isn't over: declaring variables
     const line = storyline.line;
     const storyChoice = storyline.choice;
     const goTo = storyline.goto;
+    //if there are no choices
     if (!storyChoice) {
       if (choice.current) {
+        //hiding the choices and choice buttons
         if (!choice.current.classList.contains("hide")) {
           choice.current.classList.add("hide");
         }
@@ -125,16 +139,21 @@ const Television = () => {
           choiceButtons.current.classList.add("hide");
         }
       }
+      //showing the next button if it were hidden
       if (nextBtn.current && nextBtn.current.classList.contains("hide")) {
         nextBtn.current.classList.remove("hide");
       }
+      //setting line number for next scene
       setLineNumber(goTo);
     } else {
+      //declaring variables
       const lineA = storyline.ca;
       const lineB = storyline.cb;
+      //hide next button
       if (nextBtn.current && !nextBtn.current.classList.contains("hide")) {
         nextBtn.current.classList.add("hide");
       }
+      //show choices
       if (choice.current) {
         if (choice.current.classList.contains("hide")) {
           choice.current.classList.remove("hide");
@@ -146,32 +165,39 @@ const Television = () => {
           cb.current.innerHTML = lineB;
         }
       }
+      //show choice buttons
       if (choiceButtons.current) {
         if (choiceButtons.current.classList.contains("hide")) {
           choiceButtons.current.classList.remove("hide");
         }
       }
     }
-
+    //setting the contents of the line
     if (storyLine.current) {
       storyLine.current.innerHTML = line;
     }
+    //playing audio
     audio.play();
   };
 
-  //quit
+  //quit/restart the story
   const quit = () => {
+    //stopping and resetting the timer
     setIsTimed(false);
     setSeconds(0);
+    //showing the welcome page
     if (welcomePage.current) {
       welcomePage.current.classList.remove("hide");
     }
+    //hiding the story board
     if (storyBoard.current && !storyBoard.current.classList.contains("hide")) {
       storyBoard.current.classList.add("hide");
     }
+    //hiding the end screen
     if (endScreen.current && !endScreen.current.classList.contains("hide")) {
       endScreen.current.classList.add("hide");
     }
+    //resetting line Number, clearing Answer Array, and setting Win to false.
     setLineNumber(0);
     setAnswer([]);
     setWin(false);
@@ -179,11 +205,14 @@ const Television = () => {
 
   //choice a is picked
   const choicea = (storyline) => {
+    //play audio
     audio.play();
+    //setting up for next scene
     const goToA = storyline.gotoa;
     const ca = storyline.ca;
     setAnswer((prevAnswers) => [...prevAnswers, ca]);
     const newA = goToA;
+    //checking if the story is over (if the player won or lost)
     if (newA == 100 || newA == -1) {
       if (newA == 100) {
         setWin(true);
@@ -198,6 +227,7 @@ const Television = () => {
       }
       return;
     }
+    //if the story isn't over yet... continue here by setting the line Number and then executing the next function from above.
     setLineNumber(goToA);
     setTimeout(() => {
       next(STORYLINE[goToA]);
@@ -206,11 +236,14 @@ const Television = () => {
 
   //choice b is picked
   const choiceb = (storyline) => {
+    //play audio
     audio.play();
+    //setting up for next scene
     const goToB = storyline.gotob;
     const cb = storyline.cb;
     setAnswer((prevAnswers) => [...prevAnswers, cb]);
     const newB = goToB;
+    //checking if the story is over (if the player won or lost)
     if (newB == 100 || newB == -1) {
       if (newB == 100) {
         setWin(true);
@@ -225,6 +258,7 @@ const Television = () => {
       }
       return;
     }
+    //if the story isn't over yet... continue here by setting the line Number and then executing the next function from above.
     setLineNumber(goToB);
     setTimeout(() => {
       next(STORYLINE[goToB]);
@@ -234,24 +268,28 @@ const Television = () => {
   //save notepad changes
   const saveNotepad = () => {
     setNotes(notepad.value);
-    notepad.value = notes;
+    notepad.value = notes; //setting the value of the notes to make sure it is saved
   };
 
   // switch clock mode
   const switchClock = () => {
-    setTextTime(true);
     if (textTime) {
-      if (clock1.current) {
-        clock1.current.classList.toggle("hide");
-      }
-      if (clock2.current) {
-        clock2.current.classList.toggle("hide");
-      }
+      setTextTime(false);
+    } else {
+      setTextTime(true);
+    }
+    //depending on mode, showing on and off
+    if (clock1.current) {
+      clock1.current.classList.toggle("hide");
+    }
+    if (clock2.current) {
+      clock2.current.classList.toggle("hide");
     }
   };
 
   return (
     <div>
+      {/* setting the TV */}
       <img src={tvImage} alt="" className="overlay-television" />
 
       {/* enter your name screen */}
