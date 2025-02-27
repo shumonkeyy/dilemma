@@ -349,13 +349,13 @@ export const STORYLINE = [
   },
   {
     id: 53,
-    line: "They stay silent, so I continue, “I want to know why. Why did you all do such a thing?” I ask, “What happened that night of the murders? I demand answers from all of you now.”<br/><br/>Despite my aggressiveness, nobody said anything. Throughout the entire questioning, I continuously demanded answers from these men, but got no response back. <br/><br/>In order for justice to be served, I needed to go to my last resort. The strategy where officer Louis and his brother confessed their sides of the story. <br/><br/>I sent these men- no, monsters, to be tortured into telling the truth.",
+    line: "They stay silent, so I continue, “I want to know why. Why did you all do such a thing?” I ask, “What happened that night of the murders? I demand answers from all of you now.”<br/><br/>Despite my aggressiveness, nobody said anything. Throughout the entire questioning, I continuously demanded answers from these men, but got no response back. <br/><br/>In order for justice to be served, I needed to go to my last resort. The strategy where officer Louis and his brother confessed their sides of the story.",
     choice: false,
     goto: 54,
   },
   {
     id: 54,
-    line: "Officer Arbor was the first one to crack after being water boarded. Gasping for air, he shouted, “Okay, okay! I’ll tell you what happened. The whole purpose of the task force was not looking for the drug runner, but for Aileen.” <br/><br/>“The case was never about that,” another officer confessed in his individual investigation, “We were all involved with the murders because of the mayor's orders.”",
+    line: "I sent these men- no, monsters, to be tortured into telling the truth. <br/><br/>Officer Arbor was the first one to crack after being water boarded. Gasping for air, he shouted, “Okay, okay! I’ll tell you what happened. The whole purpose of the task force was not looking for the drug runner, but for Aileen.” <br/><br/>“The case was never about that,” another officer confessed in his individual investigation, “We were all involved with the murders because of the mayor's orders.”",
     choice: false,
     goto: 55,
   },
@@ -398,7 +398,7 @@ export const STORYLINE = [
     choice: true,
     ca: "(A) Disclose this information to the public",
     cb: "(B) Protect the reputation of the police",
-    gotoa: -1,
+    gotoa: 100,
     gotob: -1,
   },
 ];

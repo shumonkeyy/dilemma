@@ -17,11 +17,10 @@ body {
 .overlap {
   position: absolute;
   margin-top: -23%;
-  /* margin-top: 12%; */
   margin-left: 12%;
   text-align: left;
   width: 55%;
-  height: 50vh;
+  height: 45vh;
   overflow-y: scroll;
 }
 

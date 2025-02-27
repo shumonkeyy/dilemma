@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import "../index.css";
 import tvImage from "../assets/tv.png";
 import { STORYLINE } from "../lines";
+import sound from ".././assets/walkie-talkie-beep.mp3";
 
 const Television = () => {
   //declaring variables
@@ -29,6 +30,8 @@ const Television = () => {
   const [isTimed, setIsTimed] = useState(false);
   const clock1 = useRef(null);
   const clock2 = useRef(null);
+  const [win, setWin] = useState(false);
+  const audio = new Audio(sound);
 
   useEffect(() => {
     let interval;
@@ -94,6 +97,7 @@ const Television = () => {
     }
     const newLineNumber = lineNumber + 1;
     setLineNumber(newLineNumber);
+    audio.play();
   };
 
   //next page
@@ -152,7 +156,9 @@ const Television = () => {
     if (storyLine.current) {
       storyLine.current.innerHTML = line;
     }
+    audio.play();
   };
+
   //quit
   const quit = () => {
     setIsTimed(false);
@@ -168,13 +174,30 @@ const Television = () => {
     }
     setLineNumber(0);
     setAnswer([]);
+    setWin(false);
   };
 
   //choice a is picked
   const choicea = (storyline) => {
+    audio.play();
     const goToA = storyline.gotoa;
     const ca = storyline.ca;
     setAnswer((prevAnswers) => [...prevAnswers, ca]);
+    const newA = goToA;
+    if (newA == 100 || newA == -1) {
+      if (newA == 100) {
+        setWin(true);
+      }
+      if (storyBoard.current) {
+        storyBoard.current.classList.add("hide");
+      }
+      if (endScreen.current) {
+        setIsTimed(false);
+        setTextTime(false);
+        endScreen.current.classList.remove("hide");
+      }
+      return;
+    }
     setLineNumber(goToA);
     setTimeout(() => {
       next(STORYLINE[goToA]);
@@ -183,9 +206,25 @@ const Television = () => {
 
   //choice b is picked
   const choiceb = (storyline) => {
+    audio.play();
     const goToB = storyline.gotob;
     const cb = storyline.cb;
     setAnswer((prevAnswers) => [...prevAnswers, cb]);
+    const newB = goToB;
+    if (newB == 100 || newB == -1) {
+      if (newB == 100) {
+        setWin(true);
+      }
+      if (storyBoard.current) {
+        storyBoard.current.classList.add("hide");
+      }
+      if (endScreen.current) {
+        setIsTimed(false);
+        setTextTime(false);
+        endScreen.current.classList.remove("hide");
+      }
+      return;
+    }
     setLineNumber(goToB);
     setTimeout(() => {
       next(STORYLINE[goToB]);
@@ -308,7 +347,7 @@ const Television = () => {
       {/* end screen */}
       <div ref={endScreen} className="overlay-television hide">
         <div className="end-screen">
-          <h1>end screen</h1>
+          <h1>{win ? "you made it!" : "you failed..."}</h1>
           <p>scroll to the end to restart.</p>
           <p ref={clock1}>
             time: {hours < 10 ? "0" + hours : hours}:
@@ -330,10 +369,9 @@ const Television = () => {
               return <li key={answer.indexOf(picked)}>{picked}</li>;
             })}
           </ul>
-          <p>
-            score: {answer.length - 1}
-            <br />
-            mistake at: {answer[answer.length - 1]} <br />
+          <p>score: {win ? answer.length : answer.length - 1}</p>
+          <p className={win && "hide"}>
+            mistake at: {answer[answer.length - 1]}
           </p>
           <button onClick={() => quit()}>Restart</button>
         </div>
@@ -388,6 +426,72 @@ const Television = () => {
                 <br />
                 The result of this case relies on you, Major.
               </p>
+              <p>FAQs</p>
+              <div class="accordion" id="accordionExample">
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button
+                      class="accordion-button"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapseOne"
+                      aria-expanded="true"
+                      aria-controls="collapseOne"
+                    >
+                      Accordion Item #1
+                    </button>
+                  </h2>
+                  <div
+                    id="collapseOne"
+                    class="accordion-collapse collapse show"
+                    data-bs-parent="#accordionExample"
+                  >
+                    <div class="accordion-body">yaya</div>
+                  </div>
+                </div>
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button
+                      class="accordion-button collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapseTwo"
+                      aria-expanded="false"
+                      aria-controls="collapseTwo"
+                    >
+                      Accordion Item #2
+                    </button>
+                  </h2>
+                  <div
+                    id="collapseTwo"
+                    class="accordion-collapse collapse"
+                    data-bs-parent="#accordionExample"
+                  >
+                    <div class="accordion-body">yayaya</div>
+                  </div>
+                </div>
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button
+                      class="accordion-button collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapseThree"
+                      aria-expanded="false"
+                      aria-controls="collapseThree"
+                    >
+                      Accordion Item #3
+                    </button>
+                  </h2>
+                  <div
+                    id="collapseThree"
+                    class="accordion-collapse collapse"
+                    data-bs-parent="#accordionExample"
+                  >
+                    <div class="accordion-body">yayayaya</div>
+                  </div>
+                </div>
+              </div>
             </div>
             <div className="modal-footer">
               <button
