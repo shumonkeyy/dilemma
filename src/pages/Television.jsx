@@ -38,15 +38,19 @@ const Television = () => {
     let interval;
     if (isTimed) {
       interval = setInterval(() => {
-        setSeconds((prevSeconds) => prevSeconds + 1);
-        if (seconds == 60) {
-          setSeconds(0);
-          setMinutes((prevMinutes) => prevMinutes + 1);
-        }
-        if (minutes == 60) {
-          setMinutes(0);
-          setHours((prevHours) => prevHours + 1);
-        }
+        setSeconds((prevSeconds) => {
+          if (prevSeconds + 1 === 60) {
+            setMinutes((prevMinutes) => {
+              if (prevMinutes + 1 === 60) {
+                setHours((prevHours) => prevHours + 1);
+                return 0;
+              }
+              return prevMinutes + 1;
+            });
+            return 0;
+          }
+          return prevSeconds + 1;
+        });
       }, 1000);
     } else {
       clearInterval(interval);
@@ -289,6 +293,14 @@ const Television = () => {
 
   return (
     <div>
+      {/* "sorry, can't use this on screens with widths smaller than 768!" note */}
+      <div className="sorryScreen">
+        <h1>
+          Sorry, due to the format of the game, this cannot be run on screens
+          with widths smaller than 768px :(
+        </h1>
+        <p>We suggest you run it on a bigger screen!</p>
+      </div>
       {/* setting the TV */}
       <img src={tvImage} alt="" className="overlay-television" />
 
@@ -437,6 +449,7 @@ const Television = () => {
               ></button>
             </div>
             <div className="modal-body">
+              {/* instruction section */}
               <p>
                 Welcome to Dillemma, Major!
                 <br />
@@ -451,7 +464,10 @@ const Television = () => {
                 to help you make decisions, a notepad has been added. Click
                 "notes" in order to access it, and after you finish typing your
                 notes, make sure to press the "Save changes" button, or else
-                your notes will be lost.
+                your notes will be lost. Case Information will provide the
+                details of the events of the actual crime with a link to another
+                resource, while the GitHub will provide the link to the
+                background code of this interactive story.
                 <br />
                 <br />
                 This game is inspired by the real life case of Eileen Sarmenta
@@ -466,6 +482,7 @@ const Television = () => {
                 <br />
                 The result of this case relies on you, Major.
               </p>
+              {/* FAQ section */}
               <p>FAQs</p>
               <div class="accordion" id="accordionExample">
                 <div class="accordion-item">
@@ -475,20 +492,26 @@ const Television = () => {
                       type="button"
                       data-bs-toggle="collapse"
                       data-bs-target="#collapseOne"
-                      aria-expanded="true"
+                      aria-expanded="false"
                       aria-controls="collapseOne"
                     >
-                      Accordion Item #1
+                      What is the main objective of the game?
                     </button>
                   </h2>
                   <div
                     id="collapseOne"
-                    class="accordion-collapse collapse show"
+                    class="accordion-collapse collapse"
                     data-bs-parent="#accordionExample"
                   >
-                    <div class="accordion-body">yaya</div>
+                    <div class="accordion-body">
+                      In this game, you play as the head of the police force who
+                      is in the process of solving a murder case that is based
+                      off the 1993 slay-rape case of Eileen Sarmenta and Allan
+                      Gomez.
+                    </div>
                   </div>
                 </div>
+
                 <div class="accordion-item">
                   <h2 class="accordion-header">
                     <button
@@ -499,7 +522,7 @@ const Television = () => {
                       aria-expanded="false"
                       aria-controls="collapseTwo"
                     >
-                      Accordion Item #2
+                      What can I play this game on?
                     </button>
                   </h2>
                   <div
@@ -507,9 +530,15 @@ const Television = () => {
                     class="accordion-collapse collapse"
                     data-bs-parent="#accordionExample"
                   >
-                    <div class="accordion-body">yayaya</div>
+                    <div class="accordion-body">
+                      Unfortunately, due to the format of the game being a TV,
+                      this game can only be run on screens larger than 768
+                      pixels. We recommend you use full screen in order for a
+                      less cramped format.
+                    </div>
                   </div>
                 </div>
+
                 <div class="accordion-item">
                   <h2 class="accordion-header">
                     <button
@@ -520,7 +549,7 @@ const Television = () => {
                       aria-expanded="false"
                       aria-controls="collapseThree"
                     >
-                      Accordion Item #3
+                      How do I stop the game?
                     </button>
                   </h2>
                   <div
@@ -528,7 +557,60 @@ const Television = () => {
                     class="accordion-collapse collapse"
                     data-bs-parent="#accordionExample"
                   >
-                    <div class="accordion-body">yayayaya</div>
+                    <div class="accordion-body">
+                      You can press the "quit" button any time throughout the
+                      story to go back to the home screen!
+                    </div>
+                  </div>
+                </div>
+
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button
+                      class="accordion-button collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapseFour"
+                      aria-expanded="false"
+                      aria-controls="collapseFour"
+                    >
+                      How do I increase my score?
+                    </button>
+                  </h2>
+                  <div
+                    id="collapseFour"
+                    class="accordion-collapse collapse"
+                    data-bs-parent="#accordionExample"
+                  >
+                    <div class="accordion-body">
+                      Making correct choices during the game will increase your
+                      score, helping you solve the case.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button
+                      class="accordion-button collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapseFive"
+                      aria-expanded="false"
+                      aria-controls="collapseFive"
+                    >
+                      How do I know what I got wrong?
+                    </button>
+                  </h2>
+                  <div
+                    id="collapseFive"
+                    class="accordion-collapse collapse"
+                    data-bs-parent="#accordionExample"
+                  >
+                    <div class="accordion-body">
+                      At the end of the game, your incorrect answers will be
+                      shown.
+                    </div>
                   </div>
                 </div>
               </div>
