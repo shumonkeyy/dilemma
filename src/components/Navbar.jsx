@@ -43,6 +43,7 @@ const Navbar = () => {
                 <a
                   className="nav-link"
                   href="https://github.com/shumonkeyy/dilemma"
+                  target="_blank"
                 >
                   GitHub.
                 </a>

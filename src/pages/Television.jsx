@@ -1,39 +1,45 @@
 import React, { useRef, useState, useEffect } from "react";
-import "../index.css";
+import sound from ".././assets/walkie-talkie-beep.mp3";
 import tvImage from "../assets/tv.png";
 import { STORYLINE } from "../lines";
-import sound from ".././assets/walkie-talkie-beep.mp3";
+import "../index.css";
 
 const Television = () => {
-  //declaring variables
-  const welcomePage = useRef(null);
-  const storyLine = useRef(null);
-  const storyBoard = useRef(null);
+  //variable declaration
   const [lineNumber, setLineNumber] = useState(0);
-  const ca = useRef(null);
-  const cb = useRef(null);
-  const choice = useRef(null);
-  const choiceButtons = useRef(null);
-  const nextBtn = useRef(null);
   const [notes, setNotes] = useState("");
-  const notepad = useRef(null);
-  const userName = useRef(null);
   const [user, setUser] = useState("");
-  const usernameInput = useRef(null);
-  const usernameHead = useRef(null);
   const [answer, setAnswer] = useState([]);
-  const endScreen = useRef(null);
   const [seconds, setSeconds] = useState(0);
   const [minutes, setMinutes] = useState(0);
   const [hours, setHours] = useState(0);
   const [textTime, setTextTime] = useState(false);
   const [isTimed, setIsTimed] = useState(false);
+  const [win, setWin] = useState(false);
+
+  const welcomePage = useRef(null);
+
+  const storyLine = useRef(null);
+  const storyBoard = useRef(null);
+  const ca = useRef(null);
+  const cb = useRef(null);
+  const choice = useRef(null);
+  const choiceButtons = useRef(null);
+  const nextBtn = useRef(null);
+  const notepad = useRef(null);
+
+  const userName = useRef(null);
+  const usernameInput = useRef(null);
+  const usernameHead = useRef(null);
+
+  const endScreen = useRef(null);
   const clock1 = useRef(null);
   const clock2 = useRef(null);
-  const [win, setWin] = useState(false);
+
   const audio = new Audio(sound);
 
-  // timer: will start when "start" button is clicked and will stop at either quit or when the interactive story is finished.
+  // timer: will start when "start" button is clicked and will stop at either quit
+  // or when the interactive story is finished.
   useEffect(() => {
     let interval;
     if (isTimed) {
@@ -61,15 +67,17 @@ const Television = () => {
 
   //continue to welcome page
   const continueToWelcome = () => {
-    //hide "type your name" page
+    //hide username form
     if (userName.current) {
       userName.current.classList.add("hide");
     }
+
     //show welcome page
     if (welcomePage.current) {
       welcomePage.current.classList.remove("hide");
     }
-    //use name entered in "type your name page" to add it to the welcome page
+
+    //use name entered in username form to add it to the welcome page
     if (usernameInput.current) {
       const inputValue = usernameInput.current.value;
       setUser(inputValue);
@@ -84,10 +92,12 @@ const Television = () => {
     if (welcomePage.current) {
       welcomePage.current.classList.add("hide");
     }
+
     //hide the choices (no choices at the start)
     if (choice.current && !choice.current.classList.contains("hide")) {
       choice.current.classList.add("hide");
     }
+
     //hide the choice Buttons
     if (
       choiceButtons.current &&
@@ -95,23 +105,27 @@ const Television = () => {
     ) {
       choiceButtons.current.classList.add("hide");
     }
+
     //show the next Button
     if (nextBtn.current && nextBtn.current.classList.contains("hide")) {
       nextBtn.current.classList.remove("hide");
     }
+
     //show the storyboard
     if (storyBoard.current) {
       storyBoard.current.classList.remove("hide");
     }
+
     //set the line to the data from the array based on line number
     if (storyLine.current) {
       storyLine.current.innerHTML = line;
     }
+
     //setting new Line Number
     const newLineNumber = lineNumber + 1;
     setLineNumber(newLineNumber);
-    //playing audio
-    audio.play();
+
+    audio.play(); //playing audio
   };
 
   //next page: will go to the next scene
@@ -128,10 +142,12 @@ const Television = () => {
       }
       return;
     }
-    //if it isn't over: declaring variables
+
+    //if it isn't over: variable declaration
     const line = storyline.line;
     const storyChoice = storyline.choice;
     const goTo = storyline.goto;
+
     //if there are no choices
     if (!storyChoice) {
       if (choice.current) {
@@ -143,20 +159,24 @@ const Television = () => {
           choiceButtons.current.classList.add("hide");
         }
       }
+
       //showing the next button if it were hidden
       if (nextBtn.current && nextBtn.current.classList.contains("hide")) {
         nextBtn.current.classList.remove("hide");
       }
+
       //setting line number for next scene
       setLineNumber(goTo);
     } else {
-      //declaring variables
+      //variable declaration
       const lineA = storyline.ca;
       const lineB = storyline.cb;
+
       //hide next button
       if (nextBtn.current && !nextBtn.current.classList.contains("hide")) {
         nextBtn.current.classList.add("hide");
       }
+
       //show choices
       if (choice.current) {
         if (choice.current.classList.contains("hide")) {
@@ -169,6 +189,7 @@ const Television = () => {
           cb.current.innerHTML = lineB;
         }
       }
+
       //show choice buttons
       if (choiceButtons.current) {
         if (choiceButtons.current.classList.contains("hide")) {
@@ -176,12 +197,13 @@ const Television = () => {
         }
       }
     }
+
     //setting the contents of the line
     if (storyLine.current) {
       storyLine.current.innerHTML = line;
     }
-    //playing audio
-    audio.play();
+
+    audio.play(); //playing audio
   };
 
   //quit/restart the story
@@ -189,18 +211,22 @@ const Television = () => {
     //stopping and resetting the timer
     setIsTimed(false);
     setSeconds(0);
+
     //showing the welcome page
     if (welcomePage.current) {
       welcomePage.current.classList.remove("hide");
     }
+
     //hiding the story board
     if (storyBoard.current && !storyBoard.current.classList.contains("hide")) {
       storyBoard.current.classList.add("hide");
     }
+
     //hiding the end screen
     if (endScreen.current && !endScreen.current.classList.contains("hide")) {
       endScreen.current.classList.add("hide");
     }
+
     //resetting line Number, clearing Answer Array, and setting Win to false.
     setLineNumber(0);
     setAnswer([]);
@@ -209,13 +235,14 @@ const Television = () => {
 
   //choice a is picked
   const choicea = (storyline) => {
-    //play audio
-    audio.play();
+    audio.play(); //play audio
+
     //setting up for next scene
     const goToA = storyline.gotoa;
     const ca = storyline.ca;
     setAnswer((prevAnswers) => [...prevAnswers, ca]);
     const newA = goToA;
+
     //checking if the story is over (if the player won or lost)
     if (newA == 100 || newA == -1) {
       if (newA == 100) {
@@ -231,6 +258,7 @@ const Television = () => {
       }
       return;
     }
+
     //if the story isn't over yet... continue here by setting the line Number and then executing the next function from above.
     setLineNumber(goToA);
     setTimeout(() => {
@@ -240,13 +268,14 @@ const Television = () => {
 
   //choice b is picked
   const choiceb = (storyline) => {
-    //play audio
-    audio.play();
+    audio.play(); //play audio
+
     //setting up for next scene
     const goToB = storyline.gotob;
     const cb = storyline.cb;
     setAnswer((prevAnswers) => [...prevAnswers, cb]);
     const newB = goToB;
+
     //checking if the story is over (if the player won or lost)
     if (newB == 100 || newB == -1) {
       if (newB == 100) {
@@ -262,6 +291,7 @@ const Television = () => {
       }
       return;
     }
+
     //if the story isn't over yet... continue here by setting the line Number and then executing the next function from above.
     setLineNumber(goToB);
     setTimeout(() => {
@@ -282,6 +312,7 @@ const Television = () => {
     } else {
       setTextTime(true);
     }
+
     //depending on mode, showing on and off
     if (clock1.current) {
       clock1.current.classList.toggle("hide");
@@ -301,7 +332,8 @@ const Television = () => {
         </h1>
         <p>We suggest you run it on a bigger screen!</p>
       </div>
-      {/* setting the TV */}
+
+      {/* setting the TV background*/}
       <img src={tvImage} alt="" className="overlay-television" />
 
       {/* enter your name screen */}
@@ -397,31 +429,31 @@ const Television = () => {
       {/* end screen */}
       <div ref={endScreen} className="overlay-television hide">
         <div className="end-screen">
-          <h1>{win ? "you made it!" : "you failed..."}</h1>
-          <p>scroll to the end to restart.</p>
+          <h1>{win ? "You made it!" : "You failed..."}</h1>
+          <p>Scroll to the end to restart.</p>
           <p ref={clock1}>
-            time: {hours < 10 ? "0" + hours : hours}:
+            Time: {hours < 10 ? "0" + hours : hours}:
             {minutes < 10 ? "0" + minutes : minutes}:
             {seconds < 10 ? "0" + seconds : seconds} &nbsp;&nbsp;
             <span>
-              <button onClick={() => switchClock()}>switch timer mode</button>
+              <button onClick={() => switchClock()}>Switch timer mode</button>
             </span>
           </p>
           <p ref={clock2} className="hide">
-            time: {hours} H {minutes} M {seconds} S &nbsp;&nbsp;
+            Time: {hours} H {minutes} M {seconds} S &nbsp;&nbsp;
             <span>
-              <button onClick={() => switchClock()}>switch timer mode</button>
+              <button onClick={() => switchClock()}>Switch timer mode</button>
             </span>
           </p>
-          <p>your choices:</p>
+          <p>Your choices:</p>
           <ul>
             {answer.map((picked) => {
               return <li key={answer.indexOf(picked)}>{picked}</li>;
             })}
           </ul>
-          <p>score: {win ? answer.length : answer.length - 1}</p>
-          <p className={win && "hide"}>
-            mistake at: {answer[answer.length - 1]}
+          <p>Score: {win ? answer.length : answer.length - 1}</p>
+          <p className={win ? "hide" : undefined}>
+            Mistake at: {answer[answer.length - 1]}
           </p>
           <button onClick={() => quit()}>Restart</button>
         </div>
@@ -484,11 +516,11 @@ const Television = () => {
               </p>
               {/* FAQ section */}
               <p>FAQs</p>
-              <div class="accordion" id="accordionExample">
-                <div class="accordion-item">
-                  <h2 class="accordion-header">
+              <div className="accordion" id="accordionExample">
+                <div className="accordion-item">
+                  <h2 className="accordion-header">
                     <button
-                      class="accordion-button"
+                      className="accordion-button"
                       type="button"
                       data-bs-toggle="collapse"
                       data-bs-target="#collapseOne"
@@ -500,10 +532,10 @@ const Television = () => {
                   </h2>
                   <div
                     id="collapseOne"
-                    class="accordion-collapse collapse"
+                    className="accordion-collapse collapse"
                     data-bs-parent="#accordionExample"
                   >
-                    <div class="accordion-body">
+                    <div className="accordion-body">
                       In this game, you play as the head of the police force who
                       is in the process of solving a murder case that is based
                       off the 1993 slay-rape case of Eileen Sarmenta and Allan
@@ -512,10 +544,10 @@ const Television = () => {
                   </div>
                 </div>
 
-                <div class="accordion-item">
-                  <h2 class="accordion-header">
+                <div className="accordion-item">
+                  <h2 className="accordion-header">
                     <button
-                      class="accordion-button collapsed"
+                      className="accordion-button collapsed"
                       type="button"
                       data-bs-toggle="collapse"
                       data-bs-target="#collapseTwo"
@@ -527,10 +559,10 @@ const Television = () => {
                   </h2>
                   <div
                     id="collapseTwo"
-                    class="accordion-collapse collapse"
+                    className="accordion-collapse collapse"
                     data-bs-parent="#accordionExample"
                   >
-                    <div class="accordion-body">
+                    <div className="accordion-body">
                       Unfortunately, due to the format of the game being a TV,
                       this game can only be run on screens larger than 768
                       pixels. We recommend you use full screen in order for a
@@ -539,10 +571,10 @@ const Television = () => {
                   </div>
                 </div>
 
-                <div class="accordion-item">
-                  <h2 class="accordion-header">
+                <div className="accordion-item">
+                  <h2 className="accordion-header">
                     <button
-                      class="accordion-button collapsed"
+                      className="accordion-button collapsed"
                       type="button"
                       data-bs-toggle="collapse"
                       data-bs-target="#collapseThree"
@@ -554,20 +586,20 @@ const Television = () => {
                   </h2>
                   <div
                     id="collapseThree"
-                    class="accordion-collapse collapse"
+                    className="accordion-collapse collapse"
                     data-bs-parent="#accordionExample"
                   >
-                    <div class="accordion-body">
+                    <div className="accordion-body">
                       You can press the "quit" button any time throughout the
                       story to go back to the home screen!
                     </div>
                   </div>
                 </div>
 
-                <div class="accordion-item">
-                  <h2 class="accordion-header">
+                <div className="accordion-item">
+                  <h2 className="accordion-header">
                     <button
-                      class="accordion-button collapsed"
+                      className="accordion-button collapsed"
                       type="button"
                       data-bs-toggle="collapse"
                       data-bs-target="#collapseFour"
@@ -579,20 +611,20 @@ const Television = () => {
                   </h2>
                   <div
                     id="collapseFour"
-                    class="accordion-collapse collapse"
+                    className="accordion-collapse collapse"
                     data-bs-parent="#accordionExample"
                   >
-                    <div class="accordion-body">
+                    <div className="accordion-body">
                       Making correct choices during the game will increase your
                       score, helping you solve the case.
                     </div>
                   </div>
                 </div>
 
-                <div class="accordion-item">
-                  <h2 class="accordion-header">
+                <div className="accordion-item">
+                  <h2 className="accordion-header">
                     <button
-                      class="accordion-button collapsed"
+                      className="accordion-button collapsed"
                       type="button"
                       data-bs-toggle="collapse"
                       data-bs-target="#collapseFive"
@@ -604,10 +636,10 @@ const Television = () => {
                   </h2>
                   <div
                     id="collapseFive"
-                    class="accordion-collapse collapse"
+                    className="accordion-collapse collapse"
                     data-bs-parent="#accordionExample"
                   >
-                    <div class="accordion-body">
+                    <div className="accordion-body">
                       At the end of the game, your incorrect answers will be
                       shown.
                     </div>
