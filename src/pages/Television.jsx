@@ -691,7 +691,7 @@ const Television = () => {
                   <textarea
                     ref={notepad}
                     name="notepad"
-                    cols="55"
+                    cols="40"
                     rows="10"
                     placeholder="Type your notes here..."
                   ></textarea>
