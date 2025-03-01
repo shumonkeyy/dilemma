@@ -38,7 +38,7 @@ const Television = () => {
 
   const audio = new Audio(sound);
 
-  // timer: will start when "start" button is clicked and will stop at either quit
+  // timer: will start when "start" button is clicked and will stop at either 'stop'
   // or when the interactive story is finished.
   useEffect(() => {
     let interval;
@@ -392,7 +392,7 @@ const Television = () => {
             Next
           </button>
           <button className="button" onClick={() => quit()}>
-            Quit
+            Stop
           </button>
           <button
             type="button"
@@ -492,7 +492,7 @@ const Television = () => {
                 choice, you will have to make a decision. Read the choices, and
                 carefully click on the either button A or button B after making
                 your judgement. To go to the next scene after you finish
-                reading, click 'Next'. To stop the game, click 'Quit'. In order
+                reading, click 'Next'. To stop the game, click 'Stop'. In order
                 to help you make decisions, a notepad has been added. Click
                 "notes" in order to access it, and after you finish typing your
                 notes, make sure to press the "Save changes" button, or else
